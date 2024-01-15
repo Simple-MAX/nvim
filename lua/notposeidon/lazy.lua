@@ -51,6 +51,7 @@ local plugins = {
 				'nvim-treesitter/nvim-treesitter',
 				build = ':TSUpdate',
 		},
+		{'NvChad/nvim-colorizer.lua'},
 		('nvim-treesitter/playground'),
 		'nvim-lua/plenary.nvim',
 		'folke/todo-comments.nvim',
@@ -113,5 +114,5 @@ local plugins = {
 		},
 		'nvim-pack/nvim-spectre'
 }
-
 require("lazy").setup(plugins, opts)
+require('colorizer').setup()
