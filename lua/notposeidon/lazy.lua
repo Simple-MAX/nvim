@@ -15,6 +15,15 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 		{
+				"sbdchd/neoformat",
+		},
+		{
+				"ray-x/lsp_signature.nvim",
+				event = "VeryLazy",
+				opts = {},
+				config = function(_, opts) require'lsp_signature'.setup(opts) end
+		}
+		,{
 				"folke/which-key.nvim",
 				opts = {
 						plugins = { spelling = true },
