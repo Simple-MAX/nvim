@@ -15,6 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 		{
+				'mrcjkb/rustaceanvim',
+				version = '^4', -- Recommended
+				ft = { 'rust' },
+		},
+		{
 				'nvim-lualine/lualine.nvim',
 				dependencies = { 'nvim-tree/nvim-web-devicons' }
 		},
@@ -80,7 +85,21 @@ local plugins = {
 		'hrsh7th/nvim-cmp',
 		'L3MON4D3/LuaSnip',
 		'hrsh7th/cmp-nvim-lsp',
-		'williamboman/mason.nvim',
+		{
+				'williamboman/mason.nvim',
+				opts = {
+						ensure_installed = {
+								"rust_analyzer",
+						}
+				}
+		},
+		{
+				'rust-lang/rust.vim',
+				ft = { 'rust' },
+				init = function ()
+					vim.g.rustfmt_autosave = 1
+				end
+		},
 		'williamboman/mason-lspconfig.nvim',
 		{
 				'VonHeikemen/lsp-zero.nvim',
@@ -129,3 +148,4 @@ local plugins = {
 }
 require("lazy").setup(plugins, opts)
 require('colorizer').setup()
+require("mason").setup()
