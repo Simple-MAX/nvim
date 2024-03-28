@@ -69,6 +69,16 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- debug
+vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>")
+vim.keymap.set("n", "<F10>", ":lua require'dap'.step_over()<CR>")
+vim.keymap.set("n", "<F11>", ":lua require'dap'.step_into()<CR>")
+vim.keymap.set("n", "<F12>", ":lua require'dap'.step_out()<CR>")
+vim.keymap.set("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
+vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+vim.keymap.set("n", "<leader>lb", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
+vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>")
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
@@ -313,27 +323,6 @@ require("lazy").setup({
 			-- Useful status updates for LSP.
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
-		},
-		setup = {
-			tailwindcss = function(_, opts)
-				local tw = require("lspconfig.server_configurations.tailwindcss")
-				opts.filetypes = opts.filetypes or {}
-
-				-- Add default filetypes
-				vim.list_extend(opts.filetypes, tw.default_config.filetypes)
-
-				-- Remove excluded filetypes
-				--- @param ft string
-				opts.filetypes = vim.tbl_filter(function(ft)
-					return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
-				end, opts.filetypes)
-
-				-- Add additional filetypes
-				vim.list_extend(opts.filetypes, opts.filetypes_include or {})
-			end,
-			rust_analyzer = function()
-				return true
-			end,
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
