@@ -80,5 +80,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ import = "plugins.core" },
 	{ import = "plugins.themes" },
+	{ import = "plugins.dap" },
 	{ import = "plugins" },
 })
