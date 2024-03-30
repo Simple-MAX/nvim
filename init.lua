@@ -83,3 +83,6 @@ require("lazy").setup({
 	{ import = "plugins.dap" },
 	{ import = "plugins" },
 })
+
+require("macros/create-folder")
+require("macros/go-error")
