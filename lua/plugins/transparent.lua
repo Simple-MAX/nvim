@@ -35,7 +35,7 @@ return {
 
 		require("transparent").clear_prefix("BufferLine")
 		require("transparent").clear_prefix("NeoTree")
-		require("transparent").clear_prefix("lualine")
+		-- require("transparent").clear_prefix("lualine")
 
 		vim.api.nvim_create_autocmd("VimEnter", {
 			callback = function()
