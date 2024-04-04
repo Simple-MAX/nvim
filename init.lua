@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
@@ -21,11 +23,12 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
+
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- keybindings
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
+vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 -- ThePrimeagen keymaps
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open file explore" })
 
@@ -66,7 +69,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-
 -- Plugin management
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -75,7 +77,6 @@ if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
-
 
 require("lazy").setup({
 	{ import = "plugins.core" },
